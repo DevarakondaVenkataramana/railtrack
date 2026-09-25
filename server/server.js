@@ -11,6 +11,16 @@ connectDB();
 
 const app = express();
 
+// Ensure DB connection for incoming requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -52,6 +62,10 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`🚆 Railtrack Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚆 Railtrack Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+  });
+}
+
+module.exports = app;
