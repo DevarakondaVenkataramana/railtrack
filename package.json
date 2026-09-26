@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "RAILTRACK – Smart Train Journey Tracker (MERN Stack Major Project)",
   "scripts": {
+    "start": "npm --prefix server start",
     "server": "npm --prefix server run dev",
     "client": "npm --prefix client run dev",
     "seed": "npm --prefix server run seed",
@@ -17,5 +18,8 @@
     "mongoose": "^9.10.2"
   },
   "author": "B.Tech CSE Project Team",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vercel": "^60.0.1"
+  }
 }

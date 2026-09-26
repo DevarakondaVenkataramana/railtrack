@@ -4,8 +4,10 @@ const User = require('../models/User');
 const Train = require('../models/Train');
 const Journey = require('../models/Journey');
 
-// Load environment variables
-dotenv.config();
+const path = require('path');
+
+// Load environment variables from server directory
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/railtrack';
 
