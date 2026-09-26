@@ -14,7 +14,16 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/railtrack'
 const seedDatabase = async () => {
   try {
     console.log(`Connecting to MongoDB at ${MONGO_URI}...`);
-    await mongoose.connect(MONGO_URI);
+    try {
+      await mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 5000 });
+    } catch (connErr) {
+      if (MONGO_URI !== 'mongodb://127.0.0.1:27017/railtrack') {
+        console.log('🔄 Atlas auth error. Connecting to local MongoDB at mongodb://127.0.0.1:27017/railtrack...');
+        await mongoose.connect('mongodb://127.0.0.1:27017/railtrack');
+      } else {
+        throw connErr;
+      }
+    }
     console.log('Connected to MongoDB. Clearing existing demo data...');
 
     // Clear existing collections
