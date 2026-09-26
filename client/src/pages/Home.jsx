@@ -1,9 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Train, Clock, ShieldCheck, MapPin, Search, ArrowRight, Activity, Bell, Compass, Calendar } from 'lucide-react';
+import { 
+  Train, 
+  Clock, 
+  ShieldCheck, 
+  MapPin, 
+  Search, 
+  ArrowRight, 
+  Activity, 
+  Bell, 
+  Compass, 
+  Calendar,
+  Sparkles,
+  Zap,
+  Gauge,
+  Radio,
+  Layers,
+  Award,
+  CheckCircle2,
+  TrendingUp,
+  Cpu
+} from 'lucide-react';
 import SearchForm from '../components/SearchForm';
-import TrainCard from '../components/TrainCard';
-import LoadingSpinner from '../components/LoadingSpinner';
+import ThreeHeroCanvas from '../components/ThreeHeroCanvas';
+import ThreeDCard from '../components/ThreeDCard';
+import ThreeDStationMap from '../components/ThreeDStationMap';
+import ThreeFeatureBento from '../components/ThreeFeatureBento';
+import ThreeTrainShowcase from '../components/ThreeTrainShowcase';
 import { trainService } from '../services/trainService';
 
 const Home = () => {
@@ -25,176 +48,120 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="space-y-16 pb-16">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-900 via-slate-850 to-slate-900 text-white pt-16 pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]" />
-        
-        <div className="relative max-w-5xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-400 text-xs md:text-sm font-semibold tracking-wide">
-            <Train className="w-4 h-4" /> Next-Gen Railway Journey Tracking
+    <div className="space-y-16 md:space-y-24 pb-20 bg-slate-950 text-slate-100 overflow-hidden">
+      {/* 1. HERO SECTION WITH 3D WEBGL KINETIC CANVAS */}
+      <section className="relative pt-6 md:pt-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="relative">
+          {/* 3D Three.js WebGL Interactive Canvas */}
+          <ThreeHeroCanvas />
+
+          {/* Overlaid Hero Content */}
+          <div className="relative -mt-44 md:-mt-56 z-20 max-w-5xl mx-auto text-center space-y-6 px-2">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border-cyan-400/30 text-cyan-300 text-xs md:text-sm font-bold tracking-wider uppercase shadow-xl animate-pulse">
+              <Sparkles className="w-4 h-4 text-cyan-400" /> ThreeUI 3D Kinetic Tracking Engine
+            </div>
+
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-tight drop-shadow-2xl">
+              Next-Gen Train <br className="hidden sm:inline" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">
+                Journey Intelligence
+              </span>
+            </h1>
+
+            <p className="text-sm sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed drop-shadow">
+              Experience real-time high-speed train tracking with 3D track simulations, AI-predicted delays, live platform telemetry, and coach layouts.
+            </p>
+
+            {/* Main Search Panel */}
+            <div className="pt-4 text-left">
+              <SearchForm />
+            </div>
           </div>
+        </div>
+      </section>
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight">
-            Track Your Train Journey <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300">Smarter</span>
-          </h1>
+      {/* 2. REAL-TIME TELEMETRY METRICS TICKER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="glass-panel p-5 rounded-2xl border-blue-500/20 text-center">
+            <div className="text-2xl md:text-3xl font-black text-cyan-400 font-mono">99.8%</div>
+            <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Live Tracking Precision</div>
+          </div>
+          <div className="glass-panel p-5 rounded-2xl border-cyan-500/20 text-center">
+            <div className="text-2xl md:text-3xl font-black text-white font-mono">10 ms</div>
+            <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Telemetry Latency</div>
+          </div>
+          <div className="glass-panel p-5 rounded-2xl border-indigo-500/20 text-center">
+            <div className="text-2xl md:text-3xl font-black text-indigo-400 font-mono">12,500+</div>
+            <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Active Stations Mapped</div>
+          </div>
+          <div className="glass-panel p-5 rounded-2xl border-emerald-500/20 text-center">
+            <div className="text-2xl md:text-3xl font-black text-emerald-400 font-mono">KAVACH 4.0</div>
+            <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Collision Safety Feed</div>
+          </div>
+        </div>
+      </section>
 
-          <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Search trains, explore station-wise schedules, inspect platform numbers, and monitor live journey progress with accurate delay calculations.
+      {/* 3. 3D INTERACTIVE STATION MAP & LIVE ROUTE SIMULATOR */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-4 mb-6 text-center md:text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+            <Activity className="w-3.5 h-3.5 text-cyan-400" /> Interactive Route Radar
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+            Live Station-Wise Waypoint Telemetry
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
+            Select waypoints to inspect platform assignments, arrival times, delay forecasts, and track speeds in real-time.
           </p>
-
-          {/* Search Card Container */}
-          <div className="pt-6 text-left">
-            <SearchForm />
-          </div>
         </div>
+
+        <ThreeDStationMap />
       </section>
 
-      {/* Quick Access Feature Cards */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          <Link
-            to="/search"
-            className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all group"
-          >
-            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-              <Search className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
-              Train Search
-            </h3>
-            <p className="text-xs text-slate-500">
-              Query schedules between any two stations with dates and stops.
-            </p>
-          </Link>
-
-          <Link
-            to="/search"
-            className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all group"
-          >
-            <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
-              <Clock className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-amber-600 transition-colors">
-              Station Timings
-            </h3>
-            <p className="text-xs text-slate-500">
-              Inspect arrival, departure, halt duration, and platforms for every stop.
-            </p>
-          </Link>
-
-          <Link
-            to="/my-journeys"
-            className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all group"
-          >
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-              <Compass className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-emerald-600 transition-colors">
-              My Journey
-            </h3>
-            <p className="text-xs text-slate-500">
-              Save active trips, view progress bars, and configure arrival alerts.
-            </p>
-          </Link>
-
-          <Link
-            to="/search"
-            className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all group"
-          >
-            <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-              <Activity className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-purple-600 transition-colors">
-              Train Status
-            </h3>
-            <p className="text-xs text-slate-500">
-              Live delay calculations, current station markers, and next halts.
-            </p>
-          </Link>
-        </div>
-      </section>
-
-      {/* Featured Trains Section */}
+      {/* 4. THREEUI BENTO GRID INTELLIGENCE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded">
-              Popular Routes
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
-              Featured Demo Trains
-            </h2>
-            <p className="text-sm text-slate-500">
-              Simulated express trains running across major railway corridors.
-            </p>
-          </div>
-
-          <Link
-            to="/search"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 transition-colors"
-          >
-            View All Trains <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {loading ? (
-          <LoadingSpinner message="Loading popular train routes..." />
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredTrains.map((train) => (
-              <TrainCard key={train._id} train={train} />
-            ))}
-          </div>
-        )}
+        <ThreeFeatureBento />
       </section>
 
-      {/* Innovation Highlight Banner */}
+      {/* 5. 3D HIGH SPEED TRAIN SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 rounded-3xl p-8 md:p-12 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-4 max-w-2xl">
-            <span className="text-xs font-bold tracking-widest uppercase bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full border border-blue-400/30">
-              Innovative Core Feature
-            </span>
-            <h2 className="text-2xl md:text-4xl font-extrabold leading-tight">
-              Interactive Station-Wise Vertical Journey Timeline
+        <ThreeTrainShowcase />
+      </section>
+
+      {/* 6. CALL TO ACTION WITH 3D NEON SPOTLIGHT */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative rounded-3xl glass-panel p-8 sm:p-12 md:p-16 border border-blue-500/30 overflow-hidden text-center shadow-2xl">
+          {/* Glowing Radial Backgrounds */}
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 right-1/4 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-400 text-xs font-bold uppercase tracking-wider">
+              <Zap className="w-3.5 h-3.5 text-yellow-400" /> Instant Access
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Ready to Track Your Next Journey in 3D?
             </h2>
-            <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-              Never lose track of where your train is. Our chronological route timeline clearly highlights completed stops, live location, platform allocations, and scheduled vs actual timings with computed delays.
+
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl mx-auto">
+              Save your journeys, monitor real-time platform allocations, inspect coach locations, and receive live delay alerts seamlessly.
             </p>
-            <div className="pt-2 flex flex-wrap gap-4">
+
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/register"
+                className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/30 transition-all hover:scale-105 cursor-pointer flex items-center gap-2"
+              >
+                Create Free Account <ArrowRight className="w-4 h-4" />
+              </Link>
               <Link
                 to="/search"
-                className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2"
+                className="px-8 py-4 rounded-xl glass-panel hover:bg-slate-800 text-white font-bold text-sm uppercase tracking-wider border border-slate-700 transition-all cursor-pointer"
               >
-                Try Interactive Timeline <ArrowRight className="w-4 h-4" />
+                Search Trains
               </Link>
-            </div>
-          </div>
-
-          {/* Visual Mini Mockup of Timeline */}
-          <div className="w-full lg:w-80 bg-slate-800/90 backdrop-blur rounded-2xl p-5 border border-slate-700 shadow-2xl">
-            <div className="text-xs font-bold text-slate-300 pb-3 border-b border-slate-700 flex justify-between items-center">
-              <span>Demo Express (12701)</span>
-              <span className="text-amber-400 font-bold">+18m Delay</span>
-            </div>
-            <div className="py-3 space-y-3 text-xs">
-              <div className="flex items-center gap-3 text-slate-400">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="font-semibold">Vijayawada (Dep: 06:00 AM)</span>
-              </div>
-              <div className="flex items-center gap-3 text-blue-400 font-bold">
-                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-                <span>Ongole (Train Here - Pl. 3)</span>
-              </div>
-              <div className="flex items-center gap-3 text-amber-400">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                <span>Nellore (Next - Arr: 10:18 AM)</span>
-              </div>
-              <div className="flex items-center gap-3 text-slate-400">
-                <span className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                <span>Chennai Central (Terminus)</span>
-              </div>
             </div>
           </div>
         </div>
